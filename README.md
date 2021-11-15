@@ -1,2 +1,2 @@
-# MyProject
-自己的项目
+# First setup vite
+第一次搭建vite
