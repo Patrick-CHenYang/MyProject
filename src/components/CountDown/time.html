@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+      console.log("0000",performance.now())
+function countdown({ leftTime, ms = 1000, onEnd }) {
+    let countdownTimer;
+    let startTime = performance.now();
+    console.log("performance.now()1111111",performance.now())
+
+    let nextTime = leftTime % ms;
+    console.log("nextTime",nextTime)
+    let count = leftTime;
+    
+    function clearTimer() {
+        if (countdownTimer) {
+            clearTimeout(countdownTimer);
+            countdownTimer = null;
+        }
+    }
+
+    function tick() {
+      const currentTime = performance.now();
+      // console.log("performance.now()22222222",performance.now())
+        const elapsedTime = currentTime - startTime;
+        const intervalPassed = Math.floor(elapsedTime / ms);
+        const remainingTime = count - intervalPassed * ms;
+
+        if (remainingTime <= 0) {
+            clearTimer();
+            onEnd && onEnd();
+            return;
+        }
+
+        count = remainingTime;
+        console.log(count); // 假设打印计数，实际应用中可能需要其他方式展示
+
+        const newNextTime = currentTime > nextTime ? ms - (currentTime - nextTime) : ms;
+        nextTime = newNextTime;
+        startTime = currentTime;
+
+        countdownTimer = setTimeout(tick, newNextTime);
+    }
+
+    // 初始化计时器
+    clearTimer();
+    setTimeout(tick, nextTime);
+
+    // setTimeout(()=>{
+    //   console.log("end2222222222",performance.now())
+    //   clearTimer()
+    // },5000)
+    // 返回一个方法用于外部手动停止计时器（如果需要）
+    return clearTimer;
+}
+
+// 使用示例
+const stopCountdown = countdown({ leftTime: 10, onEnd: () => console.log('Countdown ended') });
+// 如果需要提前停止计时，可以调用 stopCountdown();
+
+</script>
+
+</html>

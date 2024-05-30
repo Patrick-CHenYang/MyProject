@@ -28,15 +28,15 @@
 import moment from "moment"; 
 import { reactive,ref } from "vue";
 import {reactiveType} from './config'
-const timeSelectRef = ref()
-const state = reactive<reactiveType>({
-    closingTime:'',
-    icon:'123'
-});
+// const timeSelectRef = ref()
+// const state = reactive<reactiveType>({
+//     closingTime:'',
+//     icon:'123'
+// });
 
-const isShowTime = ()=>{
-    timeSelectRef.value.handleOpen();
-}
+// const isShowTime = ()=>{
+//     timeSelectRef.value.handleOpen();
+// }
 </script>
 
 <style lang="scss" scoped>
